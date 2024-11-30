@@ -1,0 +1,340 @@
+/* Root Styling */
+#root {
+  max-width: 1280px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container */
+.main {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: white;
+}
+
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80%;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.video-container2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 80%;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-60%, -75%);
+  scale: 80%;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  filter: brightness(0.6) blur(2px); /* Slightly dim and blur the video */
+}
+
+.video2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-60%, -25%);
+  scale: 80%;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  filter: brightness(0.6) blur(2px); /* Slightly dim and blur the video */
+}
+
+/* Banner styling */
+.banner {
+  position: fixed;
+  width: 100%;
+  height: 15vh;
+  background-color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 100; /* Ensures the banner is above the video */
+}
+
+.logo {
+  max-height: 90%;
+  max-width: 50%;
+  margin-left: 1vw;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.page-contents {
+  margin-top: 15vh;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 3vmin;
+}
+
+.intro-heading {
+  color: white;
+  font-size: 5vh;
+  z-index: 4;
+
+}
+
+.intro-box {
+  color: white;
+  width: 100%;
+  height: auto;
+  z-index: 4;
+  margin-bottom: 40px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  z-index: 4;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 250px;
+  text-align: center;
+  color: #2D2B29;
+  opacity: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.quote-button-container {
+  margin-top: 30px;
+}
+
+.quote-button {
+  background-color: white; /* A professional blue color */
+  color: #000000;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  opacity: 90%;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.quote-button:hover {
+  background-color: #8fd66f; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.quote-button:active {
+  transform: scale(1); /* Return to original size when clicked */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for pressed effect */
+}
+
+.welcome-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* Space between text and image */
+  align-items: flex-start; /* Vertically align items */
+  width: 100%;
+  padding-top: 40px; /* Add padding for spacing */
+  padding-bottom: 40px;
+  background: linear-gradient(135deg, #f7f9fc, #ffffff); /* Subtle gradient */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  z-index: 5; /* Ensure it's above the video and background */
+  animation: fadeIn 1s ease-in-out; /* Smooth fade-in animation */
+  margin-bottom: 1px; /* Add spacing below the section */
+}
+
+.welcome-section-sub {
+  flex: 1; /* Allow equal space for text and image */
+  padding: 20px 40px; /* Add spacing inside the text container */
+  text-align: left; /* Align text to the left */
+  margin-bottom: 20px; /* Add spacing for mobile responsiveness */
+  z-index: 5; /* Ensure it's above any background elements */
+  transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+.welcome-section-sub:hover {
+  color: #205b8a; /* Slight darker color shift for hover */
+}
+
+.welcome-heading {
+  font-size: 2.5rem; /* Large heading size */
+  color: #2978bd; /* Match the card icon colors */
+  margin-bottom: 10px; /* Reduce space below */
+  position: relative;
+  z-index: 5; /* Keep above background */
+  margin-top: unset;
+}
+
+.welcome-heading::after {
+  content: '';
+  display: block;
+  width: 60px; /* Line width below the heading */
+  height: 3px; /* Line height */
+  background-color: #8fd66f; /* Green color for visual interest */
+  margin-top: 10px; /* Space below the heading */
+  animation: growLine 1s ease-in-out; /* Animate the line */
+  z-index: 5; /* Ensure it is visible above other layers */
+}
+
+.welcome-text {
+  font-size: 1.5vw; /* Readable body text */
+  color: #333333; /* Dark gray for readability */
+  line-height: 1.6; /* Add line spacing */
+  max-width: 800px; /* Limit width for better readability */
+  z-index: 5; /* Keep text above */
+}
+
+.welcome-img {
+  width: 30vw;
+  height: auto;
+  padding: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  z-index: 5; /* Ensure the image is above the background */
+  margin-right: 5vw;
+}
+
+.welcome-img:hover {
+  transform: scale(1.05) rotate(2deg); /* Slight zoom and rotation on hover */
+}
+
+/* Fade-in animation for the section */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End at the original position */
+  }
+}
+
+/* Grow line animation for heading */
+@keyframes growLine {
+  from {
+    width: 0; /* Start with no width */
+    opacity: 0; /* Invisible at the start */
+  }
+  to {
+    width: 60px; /* Expand to full width */
+    opacity: 1; /* Fully visible */
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .welcome-section {
+    flex-direction: column; /* Stack text and image vertically */
+    padding: 20px; /* Reduce padding for smaller screens */
+  }
+
+  .welcome-section-sub {
+    margin-bottom: 20px; /* Space below text section */
+    text-align: center; /* Center-align text for mobile */
+  }
+
+  .welcome-img {
+    width: 80%; /* Adjust image size for smaller screens */
+    margin: 20px auto; /* Center the image */
+  }
+}
+
+.certifications {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.certification-icons {
+  width: auto;
+  height: 10%;
+}
+
+.about-section {
+  width: 75%;
+  opacity: 90%;
+  background-color: #ffffff; /* Clean white background */
+  text-align: center; /* Center-align for consistency */
+  z-index: 5; /* Ensure it's above the video and other elements */
+  padding: 20px;
+  margin: 40px;
+  border-radius: 10px;
+}
+
+.about-heading {
+  font-size: 2rem; /* Slightly smaller than the Welcome heading */
+  color: #2978bd; /* Match the primary color */
+  margin-bottom: 20px; /* Space below heading */
+  margin-top: unset;
+}
+
+.about-text {
+  font-size: 1.2rem;
+  color: #333333; /* Dark gray for readability */
+  line-height: 1.6; /* Add line spacing */
+  max-width: 90%; /* Limit text width for readability */
+  margin: 0 auto; /* Center the text container */
+}
+
+.about-button-container {
+  margin-top: 20px;
+}
+
+.about-button {
+  background-color: #2978bd;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a button shadow */
+}
+
+.about-button:hover {
+  background-color: #205b8a; /* Slightly darker blue */
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.about-button:active {
+  transform: scale(1); /* Reset scale on click */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow for pressed effect */
+}
