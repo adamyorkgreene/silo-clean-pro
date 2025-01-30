@@ -6,6 +6,35 @@
   padding: 0;
 }
 
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #2978bd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Main container */
 .main {
   position: relative;
@@ -13,6 +42,7 @@
   width: 100vw;
   overflow: hidden;
   background-color: white;
+  font-family: 'Noto Sans Display', sans-serif;
 }
 
 .video-container {
@@ -35,6 +65,25 @@
   overflow: hidden;
 }
 
+.video-container3 {
+  position: absolute;
+  top: 85vh;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.video-container-header {
+  position: absolute;
+  filter: brightness(0.6) blur(4px); /* Slightly dim and blur the video */
+  overflow: hidden;
+  height: 55vh;
+  width: 110%;
+  left: -5vw;
+}
+
 .video {
   position: absolute;
   top: 50%;
@@ -45,12 +94,13 @@
   min-height: 100%;
   min-width: 100%;
   object-fit: cover;
-  filter: brightness(0.6) blur(2px); /* Slightly dim and blur the video */
+  clip-path: inset(0 0 50% 0); /* Clip the video to limit its rendering */
+  filter: brightness(0.6) blur(4px); /* Slightly dim and blur the video */
 }
 
 .video2 {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   z-index: 1;
   transform: translate(-60%, -25%);
@@ -58,7 +108,33 @@
   min-height: 100%;
   min-width: 100%;
   object-fit: cover;
-  filter: brightness(0.6) blur(2px); /* Slightly dim and blur the video */
+  clip-path: inset(0 0 50% 0); /* Clip the video to limit its rendering */
+  filter: brightness(0.6) blur(4px); /* Slightly dim and blur the video */
+}
+
+.video3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-60%, -75%);
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  filter: brightness(0.6) blur(4px); /* Slightly dim and blur the video */
+}
+
+.video-header {
+  clip-path: inset(0 0 44vh 0); /* Clip the video to limit its rendering */
+  width: 120%;
+  position: absolute;
+  bottom: -30vh;
+  left: 0
+}
+
+.video-header-text {
+  position: relative;
+  top: 15vh;
 }
 
 /* Banner styling */
@@ -68,15 +144,121 @@
   height: 15vh;
   background-color: white;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   z-index: 100; /* Ensures the banner is above the video */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* General button group styling */
+.button-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 5vw;
+  padding-left: 10vw;
+  font-family: 'Noto Sans Display', sans-serif; /* Ensure consistent font */
+}
+
+.nav-item {
+  position: relative; /* Needed for dropdown positioning */
+  padding: 10px 20px;
+  color: black;
+  font-size: 1rem; /* Set font size */
+  font-weight: bold;
+  text-transform: uppercase; /* Make the text look cleaner */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #2978bd; /* Highlight color on hover */
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%; /* Align dropdown below the parent */
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 200px; /* Minimum width for the dropdown */
+  border: 1px solid #ddd;
+  border-radius: 3px; /* Optional if you like rounded corners */
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 15px;
+  color: black;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f7f7f7;
+  color: #2978bd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block; /* Show dropdown on hover */
+}
+
+/* Add an underline or other highlight for the active navigation item */
+.nav-item.active,
+.dropdown-link.active {
+  border-bottom: 3px solid #2978bd; /* Blue underline for active page */
+  color: #2978bd; /* Match the active color */
+  font-weight: bold; /* Optional: make the active link bold */
+}
+
+/* Optional: Style the dropdown active state */
+.dropdown-content a.active {
+  background-color: #e6f4ff; /* Subtle background for active dropdown item */
+  color: #2978bd; /* Match active color */
+}
+
+/* Regular styling for non-active links */
+.nav-item,
+.dropdown-link {
+  padding: 10px 20px;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.nav-item:hover,
+.dropdown-link:hover {
+  color: #2978bd;
+  border-bottom: 2px solid #2978bd; /* Add a hover effect */
 }
 
 .logo {
   max-height: 90%;
   max-width: 50%;
   margin-left: 1vw;
+}
+
+.lazyload-wrapper {
+  display: inline-block; /* Match the image's behavior */
+  margin: 0; /* Remove extra margins */
+  padding: 0; /* Remove padding */
+  width: auto; /* Let it adapt to content */
+  height: auto;
 }
 
 .logo:hover {
@@ -117,6 +299,8 @@
   gap: 20px;
   margin-top: 20px;
   z-index: 4;
+  opacity: 0; /* Initially hidden */
+  animation: fadeInCards 0.8s ease-in-out forwards; /* Fade-in animation for the container */
 }
 
 .card {
@@ -126,13 +310,55 @@
   width: 250px;
   text-align: center;
   color: #2D2B29;
-  opacity: 90%;
+  opacity: 0; /* Initially hidden */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transform: translateX(-50px); /* Start slightly to the left */
+  animation: slideInCard 0.8s ease-out forwards; /* Slide-in animation for individual cards */
   transition: transform 0.3s ease-in-out;
 }
 
+/* Card hover effect */
 .card:hover {
   transform: scale(1.05);
+}
+
+/* Fade-in animation for the card container */
+@keyframes fadeInCards {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide-in animation for individual cards */
+@keyframes slideInCard {
+  from {
+    opacity: 0;
+    transform: translateX(-50px); /* Start from the left */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* End at the original position */
+  }
+}
+
+/* Add delay for staggered animation */
+.card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.card:nth-child(4) {
+  animation-delay: 0.4s;
 }
 
 .quote-button-container {
@@ -153,14 +379,54 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+.contact-button {
+  background-color: #8fd66f;
+  color: #000000;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  opacity: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
 .quote-button:hover {
   background-color: #8fd66f; /* Darker blue on hover */
   transform: scale(1.05); /* Slight zoom on hover */
 }
 
+.contact-button:hover {
+  background-color: #5bc62b; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+
 .quote-button:active {
   transform: scale(1); /* Return to original size when clicked */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for pressed effect */
+}
+
+.contact-button:active {
+  transform: scale(1); /* Return to original size when clicked */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for pressed effect */
+}
+
+.welcome-section-super {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333333; /* Dark gray for readability */
+  width: 100%;
+  z-index: 5;
+  background: linear-gradient(180deg, #f7f9fc, #ffffff); /* Subtle gradient */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding-top: 40px; /* Add padding for spacing */
+  padding-bottom: 40px;
+  margin-bottom: 1px; /* Add spacing below the section */
 }
 
 .welcome-section {
@@ -169,13 +435,8 @@
   justify-content: space-between; /* Space between text and image */
   align-items: flex-start; /* Vertically align items */
   width: 100%;
-  padding-top: 40px; /* Add padding for spacing */
-  padding-bottom: 40px;
-  background: linear-gradient(135deg, #f7f9fc, #ffffff); /* Subtle gradient */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   z-index: 5; /* Ensure it's above the video and background */
   animation: fadeIn 1s ease-in-out; /* Smooth fade-in animation */
-  margin-bottom: 1px; /* Add spacing below the section */
 }
 
 .welcome-section-sub {
@@ -187,12 +448,17 @@
   transition: color 0.3s ease-in-out; /* Smooth color transition */
 }
 
-.welcome-section-sub:hover {
-  color: #205b8a; /* Slight darker color shift for hover */
-}
-
 .welcome-heading {
   font-size: 2.5rem; /* Large heading size */
+  color: #2978bd; /* Match the card icon colors */
+  margin-bottom: 10px; /* Reduce space below */
+  position: relative;
+  z-index: 5; /* Keep above background */
+  margin-top: unset;
+}
+
+.welcome-heading-2 {
+  font-size: 1.5rem; /* Large heading size */
   color: #2978bd; /* Match the card icon colors */
   margin-bottom: 10px; /* Reduce space below */
   position: relative;
@@ -226,6 +492,22 @@
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   z-index: 5; /* Ensure the image is above the background */
   margin-right: 5vw;
+}
+
+.welcome-video {
+  width: 40vw; /* Same width as the previous image */
+  height: auto; /* Maintain aspect ratio */
+  padding: 10px; /* Match the padding of the previous image */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  z-index: 5; /* Ensure the video is above the background */
+  margin-right: 5vw; /* Keep the same margin for consistent layout */
+}
+
+.welcome-video-container {
+  display: flex;
+  justify-content: flex-end; /* Align the video to the right */
+  align-items: center; /* Vertically center within the section */
+  flex: 1; /* Allow the container to share space with text */
 }
 
 .welcome-img:hover {
@@ -271,6 +553,7 @@
   .welcome-img {
     width: 80%; /* Adjust image size for smaller screens */
     margin: 20px auto; /* Center the image */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
   }
 }
 
@@ -286,9 +569,14 @@
   height: 10%;
 }
 
+.other-icon {
+  width: 30px;
+  height: auto;
+}
+
 .about-section {
   width: 75%;
-  opacity: 90%;
+  opacity: 0.9;
   background-color: #ffffff; /* Clean white background */
   text-align: center; /* Center-align for consistency */
   z-index: 5; /* Ensure it's above the video and other elements */
@@ -337,4 +625,184 @@
 .about-button:active {
   transform: scale(1); /* Reset scale on click */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow for pressed effect */
+}
+
+.about-button-2 {
+  background: linear-gradient(90deg, #2978bd, #8fd66f);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.about-button-2:hover {
+  transform: scale(1.05); /* Slight zoom */
+  background: linear-gradient(90deg, #205b8a, #5bc62b); /* Darker gradient on hover */
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #f8f8f8;
+  padding: 1rem 0;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.footer-nav {
+  margin-bottom: 0.5rem;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #007bff;
+  margin: 0 0.5rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #0056b3;
+}
+
+.footer-separator {
+  margin: 0 0.5rem;
+  color: #666;
+}
+
+.footer-copyright {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Why Choose Us Section */
+.why-choose-us-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 1200px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.why-choose-us-content {
+  flex: 2;
+  text-align: left;
+  padding-right: 20px;
+}
+
+.why-choose-us-heading {
+  font-size: 2rem;
+  color: #2978bd;
+  margin-bottom: 10px;
+}
+
+.why-choose-us-text {
+  font-size: 1.2rem;
+  color: #333333;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.why-choose-us-list {
+  list-style-type: disc;
+  margin: 0;
+  padding: 0 20px;
+  color: #333333;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.why-choose-us-button-container {
+  margin-top: 20px;
+}
+
+.why-choose-us-images {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 100px;
+  background-color: #e6e6e6;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.image-placeholder:nth-child(1) {
+  height: 200px;
+}
+
+.image-placeholder:nth-child(2) {
+  height: 150px;
+}
+
+.image-placeholder:nth-child(3) {
+  height: 250px;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem; /* Adds space between list items */
+}
+
+.icon-container {
+  width: 50px; /* Ensures all icons occupy the same space */
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0; /* Prevents the icon container from shrinking */
+}
+
+.feature-item div {
+  margin-left: 1rem; /* Adds space between the icon and the text */
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 20px;
+  padding: 20px;
+  align-items: start;
+}
+
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between icon and text */
+  align-items: center;
+}
+
+.benefit-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2978bd; /* Primary blue color */
+  margin: unset;
+}
+
+.benefit-description {
+  font-size: 1rem;
+  color: #333; /* Neutral dark gray */
+  line-height: 1.5;
 }
